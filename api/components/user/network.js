@@ -29,12 +29,24 @@ router.get('/:id', (req, res) => { // ? get one user
     })
 })
 
-router.post('/', (req, res) => {
+router.post('/', (req, res) => { // ? add one user
     console.log(req.body)
     newUser = req.body
     controller.upsert(newUser)
     .then(createdUser => {
         response.success(req, res, createdUser, 201)
+    })
+    .catch(error => {
+        console.log(error)
+        response.error(req, res, 'Internal Server Error')
+    })
+})
+
+router.delete('/:id', (req, res) => {
+    const userId = req.params.id
+    controller.remove(userId)
+    .then(confirmation => {
+        response.success(req, res, confirmation)
     })
     .catch(error => {
         console.log(error)

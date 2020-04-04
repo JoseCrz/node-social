@@ -14,9 +14,14 @@ module.exports = (injectedStore = require('../../../store/dummy')) => {
         return injectedStore.upsert(TABLE, user)
     }
 
+    const remove = id => {
+        return injectedStore.remove(TABLE, id)
+    }
+
     return {
         list,
         get,
         upsert,
+        remove
     }
 }
