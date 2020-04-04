@@ -31,8 +31,7 @@ router.get('/:id', (req, res) => { // ? get one user
 
 router.post('/', (req, res) => { // ? add one user
     console.log(req.body)
-    newUser = req.body
-    controller.upsert(newUser)
+    controller.upsert(req.body)
     .then(createdUser => {
         response.success(req, res, createdUser, 201)
     })
