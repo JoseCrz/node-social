@@ -1,11 +1,12 @@
-const store = require('../../../store/dummy')
-
 const TABLE = 'user'
 
-const list = () => {
-    return store.list(TABLE)
-}
+module.exports = (injectedStore = require('../../../store/dummy')) => {
+    
+    const list = () => {
+        return injectedStore.list(TABLE)
+    }
 
-module.exports = {
-    list,
+    return {
+        list,
+    }
 }
