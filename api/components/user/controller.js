@@ -10,8 +10,13 @@ module.exports = (injectedStore = require('../../../store/dummy')) => {
         return injectedStore.get(TABLE, id)
     }
 
+    const upsert = user => {
+        return injectedStore.upsert(TABLE, user)
+    }
+
     return {
         list,
         get,
+        upsert,
     }
 }

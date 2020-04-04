@@ -14,7 +14,9 @@ const get = async (table, id) => {
 }
 
 const upsert = async (table, data) => {
-    db[collection].push(data)
+    const collection = await list(table)
+    collection.push(data)
+    return collection[collection.length - 1]
 }
 
 const remove = async (table, id) => {

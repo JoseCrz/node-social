@@ -29,4 +29,17 @@ router.get('/:id', (req, res) => { // ? get one user
     })
 })
 
+router.post('/', (req, res) => {
+    console.log(req.body)
+    newUser = req.body
+    controller.upsert(newUser)
+    .then(createdUser => {
+        response.success(req, res, createdUser, 201)
+    })
+    .catch(error => {
+        console.log(error)
+        response.error(req, res, 'Internal Server Error')
+    })
+})
+
 module.exports = router
