@@ -1,4 +1,9 @@
-const db = {}
+const db = {
+    'user': {
+        id: 1,
+        name: 'José'
+    }
+}
 
 const list = table => {
     return db[table]
