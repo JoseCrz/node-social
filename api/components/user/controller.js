@@ -1,4 +1,4 @@
-import { nanoid } from 'nanoid'
+const nanoid = require('nanoid').nanoid
 
 const TABLE = 'user'
 
