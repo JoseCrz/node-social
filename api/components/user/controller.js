@@ -6,7 +6,12 @@ module.exports = (injectedStore = require('../../../store/dummy')) => {
         return injectedStore.list(TABLE)
     }
 
+    const get = id => {
+        return injectedStore.get(TABLE, id)
+    }
+
     return {
         list,
+        get,
     }
 }
