@@ -14,7 +14,7 @@ module.exports = (injectedStore = require('../../../store/dummy')) => {
             authData.password = user.password
         }
 
-        return injectedStore.upsert(TABLA, authData)
+        return injectedStore.upsert(TABLE, authData)
     }
 
     return {

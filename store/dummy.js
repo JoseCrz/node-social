@@ -14,9 +14,12 @@ const get = async (table, id) => {
 }
 
 const upsert = async (table, data) => {
-    const collection = await list(table)
-    collection.push(data)
-    return collection[collection.length - 1]
+    if (!db[table]) {
+        db[table] = []
+    }
+    db[table].push(data)
+
+    console.log(db)
 }
 
 const remove = async (table, id) => {
