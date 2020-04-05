@@ -35,7 +35,12 @@ const decodeHeader = req => {
 const check = {
     own: (req, owner) => {
         const decoded = decodeHeader(req)
-        console.log(decoded)
+        console.log(`[check own]:`, decoded)
+
+        // check ownership
+        if (decoded.id !== owner) {
+            throw new Error('Not allowed to do this.')
+        }
     }
 }
 

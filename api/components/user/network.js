@@ -1,5 +1,6 @@
 const express = require('express')
 
+const secure = require('./secure')
 const response = require('../../../network/response')
 const controller = require('./index')
 
@@ -56,7 +57,7 @@ const deleteUser = (req, res) => {
 router.get('/', listUsers)
 router.get('/:id', getUser)
 router.post('/', upsertUser)
-router.put('/', upsertUser)
+router.put('/', secure('update'), upsertUser)
 router.delete('/:id', deleteUser)
 
 module.exports = router
