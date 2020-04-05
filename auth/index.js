@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-
+const errorUtil = require('../utils/errorUtil')
 const JWT_SECRET = require('../config/config').jwtSecret
 
 const sign = data => {
@@ -39,7 +39,7 @@ const check = {
 
         // check ownership
         if (decoded.id !== owner) {
-            throw new Error('Not allowed to do this.')
+            throw errorUtil('Not allowed to do this', 401)
         }
     }
 }

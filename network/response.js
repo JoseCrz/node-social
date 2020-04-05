@@ -7,11 +7,11 @@ exports.success = (req, res, message = '', status = 200) => {
         })
 }
 
-exports.error = (req, res, error = 'Internal Server Error', status = 500) => {
+exports.error = (req, res, message = 'Internal Server Error', status = 500) => {
     res.status(status)
         .send({
-            error,
+            error: true,
             status,
-            body: ''
+            body: message
         })
 }
