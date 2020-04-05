@@ -5,7 +5,7 @@ const controller = require('./index')
 
 const router = express.Router()
 
-router.get('/', (req, res) => { // ? list all users
+const listUsers = (req, res) => { // ? list all users
     controller.list()
     .then(list => {
         response.success(req, res, list)
@@ -14,9 +14,9 @@ router.get('/', (req, res) => { // ? list all users
         console.log(error)
         response.error(req, res, error)
     })
-})
+}
 
-router.get('/:id', (req, res) => { // ? get one user
+const getUser = (req, res) => { // ? get one user
     userId = parseInt(req.params.id)
     
     controller.get(userId)
@@ -27,9 +27,9 @@ router.get('/:id', (req, res) => { // ? get one user
         console.log(error)
         response.error(req, res, error)
     })
-})
+}
 
-router.post('/', (req, res) => { // ? add one user
+const upsertUser = (req, res) => { // ? add one user
     console.log(req.body)
     controller.upsert(req.body)
     .then(createdUser => {
@@ -39,9 +39,9 @@ router.post('/', (req, res) => { // ? add one user
         console.log(error)
         response.error(req, res, 'Internal Server Error')
     })
-})
+}
 
-router.delete('/:id', (req, res) => {
+const deleteUser = (req, res) => {
     const userId = req.params.id
     controller.remove(userId)
     .then(confirmation => {
@@ -51,6 +51,12 @@ router.delete('/:id', (req, res) => {
         console.log(error)
         response.error(req, res, 'Internal Server Error')
     })
-})
+}
+
+router.get('/', listUsers)
+router.get('/:id', getUser)
+router.post('/', upsertUser)
+router.put('/', upsertUser)
+router.delete('/:id', deleteUser)
 
 module.exports = router
