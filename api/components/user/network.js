@@ -6,52 +6,40 @@ const controller = require('./index')
 
 const router = express.Router()
 
-const listUsers = (req, res) => { // ? list all users
+const listUsers = (req, res, next) => { // ? list all users
     controller.list()
     .then(list => {
         response.success(req, res, list)
     })
-    .catch(error => {
-        console.log(error)
-        response.error(req, res, error)
-    })
+    .catch(next)
 }
 
-const getUser = (req, res) => { // ? get one user
+const getUser = (req, res, next) => { // ? get one user
     userId = parseInt(req.params.id)
     
     controller.get(userId)
     .then(user  => {
         response.success(req, res, user)
     })
-    .catch(error => {
-        console.log(error)
-        response.error(req, res, error)
-    })
+    .catch(next)
 }
 
-const upsertUser = (req, res) => { // ? add one user
+const upsertUser = (req, res, next) => { // ? add one user
     console.log(req.body)
     controller.upsert(req.body)
     .then(createdUser => {
         response.success(req, res, createdUser, 201)
     })
-    .catch(error => {
-        console.log(error)
-        response.error(req, res, 'Internal Server Error')
-    })
+    .catch(next)
 }
 
-const deleteUser = (req, res) => {
+const deleteUser = (req, res, next) => {
     const userId = req.params.id
     controller.remove(userId)
     .then(confirmation => {
         response.success(req, res, confirmation)
     })
-    .catch(error => {
-        console.log(error)
-        response.error(req, res, 'Internal Server Error')
-    })
+    .catch(next)
 }
 
 router.get('/', listUsers)

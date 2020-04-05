@@ -8,11 +8,11 @@ const sign = data => {
 
 const getToken = authorization => {
     if (!authorization) {
-        throw new Error('There\'s no token')
+        throw errorUtil('There\'s no token', 401)
     }
 
     if(authorization.includes('Bearer ') === false) {
-        throw new Error('Invalid Token Format')
+        throw errorUtil('Invalid tToken data', 401)
     }
 
     const token = authorization.replace('Bearer ', '')
