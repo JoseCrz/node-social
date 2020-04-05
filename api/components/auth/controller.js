@@ -10,11 +10,11 @@ module.exports = (injectedStore = require('../../../store/dummy')) => {
         
         const access = await bcrypt.compare(password, data.password)
         
-        if (access) {
-            return auth.sign(data)
-        } else {
+        if (!access) {
             throw new Error ('Invalid info')
         }
+        
+        return auth.sign(data)
     }
     
     const upsert = async user => {
