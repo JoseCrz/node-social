@@ -33,10 +33,9 @@ const handleConnection = () => {
     })
 }
 
-const list = (table, id) => {
+const list = table => {
     return new Promise((resolve, reject) => {
         const query =`SELECT * FROM ${table}`
-        
         connection.query(query, (error, data) =>{
             if (error) {
                 return reject(error)
@@ -46,8 +45,43 @@ const list = (table, id) => {
     })
 }
 
+const get = (table, id) => {
+    return new Promise((resolve, reject) => {
+
+        const query = `SELECT * FROM ${table} WHERE id = ${id}`
+
+        connection.query(query, (error, result) => {
+            if (error) {
+                reject(error)
+            }
+            resolve(result)
+        })
+    })
+}
+
+const insert = (table, data) => {
+    return new Promise ((resolve, reject) => {
+        const query = `INSERT INTO ${table} SET ?`
+
+        connection.query(query, data, (error, result) => {
+            if (error) {
+                reject(error)
+            }
+            resolve(result)
+        })
+    })
+
+}
+
+const upsert = (table, data) => {
+    return insert(table, data)
+}
+
 handleConnection()
 
 module.exports = {
     list,
+    get,
+    insert,
+    upsert
 }
