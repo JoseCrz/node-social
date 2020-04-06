@@ -59,7 +59,7 @@ const get = (table, id) => {
     })
 }
 
-const insert = (table, data) => {
+const _insert = (table, data) => {
     return new Promise ((resolve, reject) => {
         const query = `INSERT INTO ${table} SET ?`
 
@@ -73,8 +73,42 @@ const insert = (table, data) => {
 
 }
 
+const _update = (table, data) => {
+    return new Promise((resolve, reject) => {
+
+        const query = `UPDATE ${table} SET ? WHERE id=?`
+
+        connection.query(query, [data, data.id], (error, result) => {
+            if (error) {
+                reject(error)
+            }
+            resolve(result)
+        })
+    })
+}
+
 const upsert = (table, data) => {
-    return insert(table, data)
+    console.log('[mysql] data:', data)
+    if (data && data.id) {
+        return _update(table, data)
+    } else {
+        console.log('[mysql]: Returning insert')
+        return _insert(table, data)
+    }
+}
+
+const query = (table, desiredQuery) => {
+    return new Promise((resolve, reject) => {
+
+        const query = `SELECT * FROM ${table} WHERE ?`
+
+        connection.query(query, desiredQuery, (error, result)=> {
+            if (error) {
+                reject(error)
+            }
+            resolve(result[0] || null)
+        })
+    })
 }
 
 handleConnection()
@@ -82,6 +116,6 @@ handleConnection()
 module.exports = {
     list,
     get,
-    insert,
-    upsert
+    upsert,
+    query
 }

@@ -3,6 +3,7 @@ const errorUtil = require('../utils/errorUtil')
 const JWT_SECRET = require('../config/config').jwtSecret
 
 const sign = data => {
+    // data = JSON.parse(JSON.stringify(data))
     return jwt.sign(data, JWT_SECRET)
 }
 
@@ -35,7 +36,7 @@ const decodeHeader = req => {
 const check = {
     own: (req, owner) => {
         const decoded = decodeHeader(req)
-        console.log(`[check own]:`, decoded)
+        console.log(`[check own] decoded:`, decoded)
 
         // check ownership
         if (decoded.id !== owner) {

@@ -6,15 +6,15 @@ const TABLE = 'auth'
 module.exports = (injectedStore = require('../../../store/dummy')) => {
     
     const login = async (username, password) => {
+        console.log('[auth controller]', password)
         const data = await injectedStore.query(TABLE, { username: username}) 
-        
         const access = await bcrypt.compare(password, data.password)
         
         if (!access) {
             throw new Error ('Invalid info')
         }
-        
-        return auth.sign(data)
+        console.log({...data})
+        return auth.sign({...data})
     }
     
     const upsert = async user => {
