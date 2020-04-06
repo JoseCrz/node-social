@@ -25,6 +25,7 @@ module.exports = (injectedStore = require('../../../store/dummy')) => {
         }
 
         if (body.password || body.username) {
+            console.log('[user controller call auth upsert]')
             await auth.upsert({
                 id: user.id,
                 username: user.username,

@@ -25,7 +25,7 @@ const getUser = (req, res, next) => { // ? get one user
 }
 
 const upsertUser = (req, res, next) => { // ? add one user
-    console.log(req.body)
+    console.log('[user network] req.body:',req.body)
     controller.upsert(req.body)
     .then(createdUser => {
         response.success(req, res, createdUser, 201)

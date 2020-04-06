@@ -48,7 +48,8 @@ const list = table => {
 const get = (table, id) => {
     return new Promise((resolve, reject) => {
 
-        const query = `SELECT * FROM ${table} WHERE id = ${id}`
+        const query = `SELECT * FROM ${table} WHERE id = '${id}'`
+        console.log('[QUERY]',query)
 
         connection.query(query, (error, result) => {
             if (error) {
@@ -75,7 +76,6 @@ const _insert = (table, data) => {
 
 const _update = (table, data) => {
     return new Promise((resolve, reject) => {
-
         const query = `UPDATE ${table} SET ? WHERE id=?`
 
         connection.query(query, [data, data.id], (error, result) => {
@@ -88,13 +88,14 @@ const _update = (table, data) => {
 }
 
 const upsert = (table, data) => {
-    console.log('[mysql] data:', data)
-    if (data && data.id) {
+    get(table, data.id)
+    .then (result => {
+        if (result.length === 0) {
+            return _insert(table, data)
+        }
         return _update(table, data)
-    } else {
-        console.log('[mysql]: Returning insert')
-        return _insert(table, data)
-    }
+    })
+    .catch(error => console.log('[UPSERT]',error))
 }
 
 const query = (table, desiredQuery) => {
