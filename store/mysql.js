@@ -33,4 +33,21 @@ const handleConnection = () => {
     })
 }
 
+const list = (table, id) => {
+    return new Promise((resolve, reject) => {
+        const query =`SELECT * FROM ${table}`
+        
+        connection.query(query, (error, data) =>{
+            if (error) {
+                return reject(error)
+            }
+            resolve(data)
+        })
+    })
+}
+
 handleConnection()
+
+module.exports = {
+    list,
+}

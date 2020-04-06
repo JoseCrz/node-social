@@ -1,6 +1,6 @@
 const nanoid = require('nanoid').nanoid
 const auth = require('../auth')
-const TABLE = 'user'
+const TABLE = 'users'
 
 module.exports = (injectedStore = require('../../../store/dummy')) => {
     
