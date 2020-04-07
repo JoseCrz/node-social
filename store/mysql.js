@@ -60,7 +60,7 @@ const get = (table, id) => {
     })
 }
 
-const _insert = (table, data) => {
+const insert = (table, data) => {
     return new Promise ((resolve, reject) => {
         const query = `INSERT INTO ${table} SET ?`
 
@@ -74,7 +74,7 @@ const _insert = (table, data) => {
 
 }
 
-const _update = (table, data) => {
+const update = (table, data) => {
     return new Promise((resolve, reject) => {
         const query = `UPDATE ${table} SET ? WHERE id=?`
 
@@ -91,9 +91,9 @@ const upsert = (table, data) => {
     get(table, data.id)
     .then (result => {
         if (result.length === 0) {
-            return _insert(table, data)
+            return insert(table, data)
         }
-        return _update(table, data)
+        return update(table, data)
     })
     .catch(error => console.log('[UPSERT]',error))
 }
@@ -118,5 +118,7 @@ module.exports = {
     list,
     get,
     upsert,
-    query
+    query,
+    insert,
+    update
 }

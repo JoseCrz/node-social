@@ -42,6 +42,10 @@ const check = {
         if (decoded.id !== owner) {
             throw errorUtil('Not allowed to do this', 401)
         }
+    },
+
+    logged: (req, owner) => {
+        const decoded = decodeHeader(req)
     }
 }
 

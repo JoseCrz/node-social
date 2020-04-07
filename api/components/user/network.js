@@ -42,10 +42,21 @@ const deleteUser = (req, res, next) => {
     .catch(next)
 }
 
+const follow = (req, res, next) => {
+    console.log(req.user)
+    console.log(req.params.id)
+    controller.follow(req.user.id, req.params.id)
+    .then(data => {
+        response.success(req, res, data, 201)
+    })
+    .catch(next)
+}
+
 router.get('/', listUsers)
 router.get('/:id', getUser)
 router.post('/', upsertUser)
 router.put('/', secure('update'), upsertUser)
 router.delete('/:id', deleteUser)
+router.post('/follow/:id', secure('follow'), follow)
 
 module.exports = router
