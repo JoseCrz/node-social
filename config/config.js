@@ -8,6 +8,9 @@ const config = {
         password: process.env.SQL_PASSWORD,
         host: process.env.SQL_HOST,
         name: process.env.SQL_NAME
+    },
+    sqlService: {
+        port: process.env.SQL_SERVICE_PORT,
     }
 
 }
