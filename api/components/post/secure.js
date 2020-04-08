@@ -5,7 +5,7 @@ module.exports = checkAuth = action => {
     const middleware = (req, res, next) => {
         switch (action) {
             case 'update':
-                const owner = req.body.id
+                const owner = req.body.user
                 auth.check.own(req, owner)
                 next()
                 break

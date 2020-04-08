@@ -16,8 +16,18 @@ module.exports = (injectedStore = require('../../../store/dummy')) => {
         return injectedStore.insert(TABLE, post)
     }
 
+    const updatePost = (userId, postId, text, postOwner) => {
+        const newPost = {
+            id: postId,
+            text,
+            user: userId
+        }
+        return injectedStore.update(TABLE, newPost)
+    }
+
     return {
         list,
-        addPost
+        addPost,
+        updatePost
     }
 }
