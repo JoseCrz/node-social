@@ -27,7 +27,6 @@ const updatePost = (req, res, next) => {
     const userId = req.user.id
     const postId = req.params.id
     const text = req.body.text
-    const postOwner = req.body.user
     controller.updatePost(userId, postId, text)
     .then(data => {
         response.success(req, res, data, 200)
