@@ -1,5 +1,6 @@
 const express = require('express')
 
+const secure = require('./secure')
 const response = require('../../../network/response')
 const controller = require('./index')
 
@@ -14,7 +15,8 @@ const list = (req, res, next) => {
 }
 
 const addPost = (req, res, next) => {
-    controller.addPost(req.body)
+    console.log(req.user)
+    controller.addPost(req.user.id,req.body.text)
     .then(post => {
         response.success(req, res, post, 201)
     })
@@ -27,6 +29,6 @@ const addPost = (req, res, next) => {
 
 //Routes
 router.get('/', list)
-router.post('/', addPost)
+router.post('/', secure('post') ,addPost)
 
 module.exports = router

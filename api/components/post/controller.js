@@ -6,11 +6,11 @@ module.exports = (injectedStore = require('../../../store/dummy')) => {
         return injectedStore.list(TABLE)
     }
 
-    const addPost = ({text, user}) => {
+    const addPost = (userId, text) => {
         const post = {
             id: nanoid(),
             text,
-            user
+            user: userId
         }
 
         return injectedStore.insert(TABLE, post)
