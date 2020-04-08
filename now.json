@@ -1,5 +1,12 @@
 {
     "version": 2,
+    "env": {
+        "JWT_SECRET": "@jwt_secret",
+        "SQL_USER": "@sql_user",
+        "SQL_PASSWORD": "@sql_password",
+        "SQL_HOST": "sql_host",
+        "SQL_NAME": "sql_name"
+    },
     "builds": [
         {
             "src": "api/app.js",
