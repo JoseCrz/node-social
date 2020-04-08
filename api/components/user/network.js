@@ -52,11 +52,20 @@ const follow = (req, res, next) => {
     .catch(next)
 }
 
+const following = (req, res, next) => {
+    return controller.following(req.params.id)
+    .then(data => {
+        return response.success(req, res, data, 200)
+    })
+    .catch(next)
+}
+
 router.get('/', listUsers)
 router.get('/:id', getUser)
 router.post('/', upsertUser)
 router.put('/', secure('update'), upsertUser)
 router.delete('/:id', deleteUser)
 router.post('/follow/:id', secure('follow'), follow)
+router.get('/:id/following', following)
 
 module.exports = router

@@ -98,11 +98,18 @@ const upsert = (table, data) => {
     .catch(error => console.log('[UPSERT]',error))
 }
 
-const query = (table, desiredQuery) => {
+const query = (table, desiredQuery, join) => {
+    let joinQuery = ''
+    if (join) {
+        const key = Object.keys(join)[0]
+        const value = join[key]
+        joinQuery = `JOIN ${key} ON ${table}.${value} = ${key}.id`
+    }
+
     return new Promise((resolve, reject) => {
 
-        const query = `SELECT * FROM ${table} WHERE ?`
-
+        const query = `SELECT * FROM ${table} ${joinQuery} WHERE ?`
+        console.log('[MYSQL QUERY]',query)
         connection.query(query, desiredQuery, (error, result)=> {
             if (error) {
                 reject(error)

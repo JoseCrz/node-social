@@ -48,11 +48,19 @@ module.exports = (injectedStore = require('../../../store/dummy')) => {
         })
     }
 
+    const following = async userId => {
+        const join = {}
+        join[TABLE] = 'user_to' //{users: user_to}
+        const query = {user_from: userId}
+        return await injectedStore.query('user_follow', query, join)
+    }
+
     return {
         list,
         get,
         upsert,
         remove,
-        follow
+        follow,
+        following
     }
 }
