@@ -13,11 +13,20 @@ const list = (req, res, next) => {
     .catch(next)
 }
 
+const addPost = (req, res, next) => {
+    controller.addPost(req.body)
+    .then(post => {
+        response.success(req, res, post, 201)
+    })
+    .catch(next)
+}
+
 
 
 
 
 //Routes
 router.get('/', list)
+router.post('/', addPost)
 
 module.exports = router
