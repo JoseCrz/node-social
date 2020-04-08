@@ -15,7 +15,7 @@ const config = {
     },
     postService: {
         port: process.env.POST_SERVICE_PORT,
-    }
-
+    },
+    remoteDB: process.env.REMOTE_DB || false
 }
 module.exports = config
