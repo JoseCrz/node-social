@@ -10,7 +10,8 @@ const config = {
         name: process.env.SQL_NAME
     },
     sqlService: {
-        port: process.env.SQL_SERVICE_PORT,
+        host: process.env.MYSQL_SERVICE_HOST || 'localhost',
+        port: process.env.MYSQL_SERVICE_PORT,
     }
 
 }
