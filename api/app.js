@@ -4,7 +4,6 @@ const swaggerUi = require('swagger-ui-express')
 
 const userRouter = require('./components/user/network')
 const authRouter = require('./components/auth/network')
-const postRouter = require('./components/post/network')
 const config = require('../config/config')
 const errors = require('../network/errors')
 
@@ -18,7 +17,6 @@ const swaggerDoc = require('./swagger.json')
 
 app.use('/api/user', userRouter)
 app.use('/api/auth', authRouter)
-app.use('/api/post', postRouter)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
 
 app.use(errors) // ! this has to be the last middleware to set
