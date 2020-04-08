@@ -16,6 +16,10 @@ const config = {
     postService: {
         port: process.env.POST_SERVICE_PORT,
     },
-    remoteDB: process.env.REMOTE_DB || false
+    remoteDB: process.env.REMOTE_DB || false,
+    cacheService : {
+        host: process.env.CACHE_SERVICE_HOST || 'localhost',
+        port: process.env.CACHE_SERVICE_PORT,
+    }
 }
 module.exports = config
